@@ -110,3 +110,18 @@ body {
 .box-0::before {
   content: "";
 }
+
+.background-green {
+  transition: all 0.5s;
+  background-color: var(--color-green);
+}
+
+.background-yellow {
+  transition: all 0.5s;
+  background-color: var(--color-yellow);
+}
+
+.background-gray {
+  transition: all 0.5s;
+  background-color: var(--color-secondary);
+}
