@@ -11,8 +11,8 @@ let curTile = 0;
 let curWord = "";
 
 const rows = document.querySelectorAll(".row");
-
 const keys = document.querySelectorAll(".key");
+
 keys.forEach((cur) => {
   if (cur.dataset.key === "enter" || cur.dataset.key === "back") {
     return;
