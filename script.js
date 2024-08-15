@@ -33,20 +33,18 @@ function checkLetters(i) {
   }, 1000 * i);
 }
 
-// EVENT LISTENERS
-keys.forEach((cur) => {
-  if (cur.dataset.key === "enter" || cur.dataset.key === "back") {
-    return;
-  }
+////// EVENT LISTENERS
+document.querySelector(".keyboard-box").addEventListener("click", function (e) {
+  if (!e.target.classList.contains("key")) return;
 
-  cur.addEventListener("click", function () {
-    if (curTile === 5) return;
+  if (e.target.dataset.key === "enter" || e.target.dataset.key === "back") return;
 
-    rows[curRow].querySelector(`.box-${curTile}`).innerHTML = cur.dataset.key;
-    curTile++;
-    curWord += cur.dataset.key;
-    console.log(curWord);
-  });
+  if (curTile === 5) return;
+
+  rows[curRow].querySelector(`.box-${curTile}`).innerHTML = e.target.dataset.key;
+  curTile++;
+  curWord += e.target.dataset.key;
+  console.log(curWord);
 });
 
 enterKey.addEventListener("click", function () {
