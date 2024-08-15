@@ -45,27 +45,33 @@ function displayAlert(msg) {
   }, 1000);
 }
 
-////// EVENT LISTENERS
-document.querySelector(".keyboard-box").addEventListener("click", function (e) {
-  if (!e.target.classList.contains("key")) return;
+function handleRowShake() {
+  rows[curRow].classList.add("shake-row");
 
-  if (e.target.dataset.key === "enter" || e.target.dataset.key === "back") return;
+  setTimeout(() => {
+    rows[curRow].classList.remove("shake-row");
+  }, 500);
+}
 
+function displayLetter(letter) {
   if (curTile === 5) return;
 
-  rows[curRow].querySelector(`.box-${curTile}`).innerHTML = e.target.dataset.key;
+  rows[curRow].querySelector(`.box-${curTile}`).innerHTML = letter;
   curTile++;
-  curWord += e.target.dataset.key;
-});
+  curWord += letter;
+}
 
-enterKey.addEventListener("click", function () {
+function enterWord() {
   if (curTile !== 5) {
     displayAlert("Not enough letters");
+    handleRowShake();
+
     return;
   }
 
   if (!WORDS.includes(curWord)) {
     displayAlert("Not in word list");
+    handleRowShake();
     return;
   }
 
@@ -78,12 +84,35 @@ enterKey.addEventListener("click", function () {
     curRow++;
     curTile = 0;
   }, 4000);
-});
+}
 
-backKey.addEventListener("click", function () {
+function backspace() {
   if (curTile === 0) return;
 
   curTile--;
   curWord = curWord.substring(0, curWord.length - 1);
   rows[curRow].querySelector(`.box-${curTile}`).innerHTML = "";
+}
+
+////// EVENT LISTENERS
+document.querySelector(".keyboard-box").addEventListener("click", function (e) {
+  if (!e.target.classList.contains("key")) return;
+
+  if (e.target.dataset.key === "enter" || e.target.dataset.key === "back") return;
+
+  displayLetter(e.target.dataset.key);
 });
+
+document.addEventListener("keydown", function (e) {
+  if (e.code === `Key${e.key.toUpperCase()}`) {
+    displayLetter(e.key);
+  } else if (e.code === "Enter") {
+    enterWord();
+  } else if (e.code === "Backspace") {
+    backspace();
+  }
+});
+
+enterKey.addEventListener("click", enterWord);
+
+backKey.addEventListener("click", backspace);
