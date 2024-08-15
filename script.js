@@ -15,6 +15,9 @@ let curWord = "";
 const rows = document.querySelectorAll(".row");
 const keys = document.querySelectorAll(".key");
 const enterKey = document.querySelector(".key-enter");
+const backKey = document.querySelector(".key-back");
+const alertBox = document.querySelector(".alert-box");
+const alertMsg = document.querySelector(".alert-msg");
 
 // FUNCTIONS
 function checkLetters(i) {
@@ -33,6 +36,15 @@ function checkLetters(i) {
   }, 1000 * i);
 }
 
+function displayAlert(msg) {
+  alertMsg.innerHTML = `${msg}`;
+  alertBox.classList.add("show-alert");
+
+  setTimeout(() => {
+    alertBox.classList.remove("show-alert");
+  }, 1000);
+}
+
 ////// EVENT LISTENERS
 document.querySelector(".keyboard-box").addEventListener("click", function (e) {
   if (!e.target.classList.contains("key")) return;
@@ -44,11 +56,18 @@ document.querySelector(".keyboard-box").addEventListener("click", function (e) {
   rows[curRow].querySelector(`.box-${curTile}`).innerHTML = e.target.dataset.key;
   curTile++;
   curWord += e.target.dataset.key;
-  console.log(curWord);
 });
 
 enterKey.addEventListener("click", function () {
-  if (curTile !== 5) return;
+  if (curTile !== 5) {
+    displayAlert("Not enough letters");
+    return;
+  }
+
+  if (!WORDS.includes(curWord)) {
+    displayAlert("Not in word list");
+    return;
+  }
 
   for (let i = 0; i < 5; i++) {
     checkLetters(i);
@@ -59,4 +78,12 @@ enterKey.addEventListener("click", function () {
     curRow++;
     curTile = 0;
   }, 4000);
+});
+
+backKey.addEventListener("click", function () {
+  if (curTile === 0) return;
+
+  curTile--;
+  curWord = curWord.substring(0, curWord.length - 1);
+  rows[curRow].querySelector(`.box-${curTile}`).innerHTML = "";
 });

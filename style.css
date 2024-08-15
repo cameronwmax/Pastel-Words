@@ -35,6 +35,38 @@ body {
   display: grid;
   grid-template-rows: repeat(6, 1fr);
   row-gap: 0.5rem;
+
+  position: relative;
+}
+
+.alert-box {
+  width: 16rem;
+  height: 4rem;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 1s;
+}
+
+.alert-msg {
+  color: #000;
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.show-alert {
+  transition: all 0.5s;
+  visibility: visible;
+  opacity: 1;
 }
 
 .row {
@@ -119,12 +151,15 @@ body {
 
 .background-green {
   background-color: var(--color-green);
+  border: none;
 }
 
 .background-yellow {
   background-color: var(--color-yellow);
+  border: none;
 }
 
 .background-gray {
   background-color: var(--color-secondary);
+  border: none;
 }
