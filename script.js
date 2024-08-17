@@ -18,22 +18,30 @@ const enterKey = document.querySelector(".key-enter");
 const backKey = document.querySelector(".key-back");
 const alertBox = document.querySelector(".alert-box");
 const alertMsg = document.querySelector(".alert-msg");
-
+let temp = 0;
 // FUNCTIONS
 function checkLetters(i) {
   setTimeout(function () {
+    let tempBox = rows[curRow].querySelector(`.box-${i}`);
+    console.log(tempBox);
     if (curWord[i] === word[i]) {
-      rows[curRow].querySelector(`.box-${i}`).classList.add("background-green");
+      tempBox.classList.add("background-green");
       document.querySelector(`[data-key="${curWord[i]}"]`).classList.remove("background-yellow");
       document.querySelector(`[data-key="${curWord[i]}"]`).classList.add("background-green");
     } else if (word.includes(curWord[i])) {
-      rows[curRow].querySelector(`.box-${i}`).classList.add("background-yellow");
+      tempBox.classList.add("background-yellow");
       document.querySelector(`[data-key="${curWord[i]}"]`).classList.add("background-yellow");
     } else {
-      rows[curRow].querySelector(`.box-${i}`).classList.add("background-gray");
+      tempBox.classList.add("background-gray");
       document.querySelector(`[data-key="${curWord[i]}"]`).classList.add("background-gray");
     }
-  }, 1000 * i);
+    tempBox.classList.add("letter-box-flip");
+
+    setTimeout(() => {
+      tempBox.classList.remove("letter-box-flip");
+      console.log(tempBox);
+    }, 500);
+  }, 500 * i);
 }
 
 function displayAlert(msg) {
@@ -56,7 +64,15 @@ function handleRowShake() {
 function displayLetter(letter) {
   if (curTile === 5) return;
 
-  rows[curRow].querySelector(`.box-${curTile}`).innerHTML = letter;
+  let tempBox = rows[curRow].querySelector(`.box-${curTile}`);
+
+  tempBox.innerHTML = letter;
+
+  tempBox.classList.add("letter-box-animation");
+  setTimeout(() => {
+    tempBox.classList.remove("letter-box-animation");
+  }, 200);
+
   curTile++;
   curWord += letter;
 }
@@ -78,12 +94,11 @@ function enterWord() {
   for (let i = 0; i < 5; i++) {
     checkLetters(i);
   }
-
   setTimeout(() => {
     curWord = "";
     curRow++;
     curTile = 0;
-  }, 4000);
+  }, 2000);
 }
 
 function backspace() {

@@ -76,6 +76,21 @@ body {
   gap: 0.5rem;
 }
 
+.shake-row {
+  animation: shake 0.1s linear;
+  animation-iteration-count: 3;
+}
+
+@keyframes shake {
+  25% {
+    transform: translateX(10px);
+  }
+
+  75% {
+    transform: translateX(-10px);
+  }
+}
+
 .letter-box {
   background-color: var(--color-main);
 
@@ -90,6 +105,26 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.letter-box-animation {
+  animation: box-scale 0.1s linear 1;
+}
+
+@keyframes box-scale {
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.letter-box-flip {
+  animation: flip 0.5s ease-out 1;
+}
+
+@keyframes flip {
+  50% {
+    transform: rotateX(90deg);
+  }
 }
 
 .keyboard-box {
