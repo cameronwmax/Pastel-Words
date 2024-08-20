@@ -10,30 +10,34 @@ word = "grape";
 let curRow = 0;
 let curTile = 0;
 let curWord = "";
+let tempRow;
+let tempWord;
+let checkingRow = false;
+let gameActive = true;
 
 // SELECTORS
 const rows = document.querySelectorAll(".row");
-const keys = document.querySelectorAll(".key");
 const enterKey = document.querySelector(".key-enter");
 const backKey = document.querySelector(".key-back");
 const alertBox = document.querySelector(".alert-box");
 const alertMsg = document.querySelector(".alert-msg");
-let tempRow;
-let tempWord;
-let checkingRow = false;
 
 // FUNCTIONS
 function checkLetters(i, row) {
   setTimeout(function () {
     let tempBox = rows[row].querySelector(`.box-${i}`);
+    let tempKey = document.querySelector(`[data-key="${tempWord[i]}"]`);
 
     if (tempWord[i] === word[i]) {
-      document.querySelector(`[data-key="${tempWord[i]}"]`).classList.remove("background-yellow");
+      tempKey.classList.remove("background-yellow");
+      tempKey.classList.add("background-green");
       tempBox.classList.add("background-green");
     } else if (word.includes(tempWord[i])) {
       tempBox.classList.add("background-yellow");
+      tempKey.classList.add("background-yellow");
     } else {
       tempBox.classList.add("background-gray");
+      tempKey.classList.add("background-gray");
     }
     tempBox.classList.add("letter-box-flip");
 
@@ -76,6 +80,16 @@ function displayLetter(letter) {
   curWord += letter;
 }
 
+function handleCorrectWord() {
+  for (let i = 0; i < 5; i++) {
+    setTimeout(() => {
+      rows[curRow].querySelector(`.box-${i}`).classList.add("letter-box-up");
+
+      if (i === 4) displayAlert("Great job!");
+    }, 500 * i);
+  }
+}
+
 function enterWord() {
   if (curTile !== 5 && checkingRow === false) {
     displayAlert("Not enough letters");
@@ -97,13 +111,19 @@ function enterWord() {
     for (let i = 0; i < 5; i++) {
       checkLetters(i, tempRow, tempWord);
     }
-
-    curWord = "";
-    curRow++;
-    curTile = 0;
-    setTimeout(() => {
-      checkingRow = false;
-    }, 2500);
+    if (curWord !== word) {
+      curWord = "";
+      curRow++;
+      curTile = 0;
+      setTimeout(() => {
+        checkingRow = false;
+      }, 2500);
+    } else {
+      setTimeout(() => {
+        gameActive = false;
+        handleCorrectWord();
+      }, 2500);
+    }
   }
 }
 
@@ -115,24 +135,30 @@ function backspace() {
   rows[curRow].querySelector(`.box-${curTile}`).innerHTML = "";
 }
 
-////// EVENT LISTENERS
-document.querySelector(".keyboard-box").addEventListener("click", function (e) {
+function handleKeyDown(e) {
+  if (checkingRow || !gameActive) return;
+
+  if (e.code === `Key${e.key.toUpperCase()}`) displayLetter(e.key.toLocaleLowerCase());
+
+  if (e.code === "Enter") enterWord();
+
+  if (e.code === "Backspace") backspace();
+}
+
+function handleKeyClicks(e) {
+  if (checkingRow || !gameActive) return;
+
   if (!e.target.classList.contains("key")) return;
 
   if (e.target.dataset.key === "enter" || e.target.dataset.key === "back") return;
 
   displayLetter(e.target.dataset.key);
-});
+}
 
-document.addEventListener("keydown", function (e) {
-  if (e.code === `Key${e.key.toUpperCase()}`) {
-    displayLetter(e.key);
-  } else if (e.code === "Enter") {
-    enterWord();
-  } else if (e.code === "Backspace") {
-    backspace();
-  }
-});
+////// EVENT LISTENERS
+document.querySelector(".keyboard-box").addEventListener("click", handleKeyClicks.bind(this));
+
+document.addEventListener("keydown", handleKeyDown.bind(this));
 
 enterKey.addEventListener("click", enterWord);
 

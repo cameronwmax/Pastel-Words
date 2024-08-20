@@ -127,6 +127,16 @@ body {
   }
 }
 
+.letter-box-up {
+  animation: box-up 0.5s linear 1;
+}
+
+@keyframes box-up {
+  50% {
+    transform: translateY(-25px) scale(1.1);
+  }
+}
+
 .keyboard-box {
   width: 50rem;
   margin: 0 auto;
