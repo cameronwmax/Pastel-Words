@@ -5,7 +5,6 @@ import { WORDS } from "./words.js";
 // VARIABLES
 let randInt = Math.floor(Math.random() * WORDS.length);
 let word = WORDS[randInt];
-word = "grape";
 
 let curRow = 0;
 let curTile = 0;
@@ -27,6 +26,7 @@ function checkLetters(i, row) {
   setTimeout(function () {
     let tempBox = rows[row].querySelector(`.box-${i}`);
     let tempKey = document.querySelector(`[data-key="${tempWord[i]}"]`);
+    console.log(tempKey);
 
     if (tempWord[i] === word[i]) {
       tempKey.classList.remove("background-yellow");
@@ -34,7 +34,9 @@ function checkLetters(i, row) {
       tempBox.classList.add("background-green");
     } else if (word.includes(tempWord[i])) {
       tempBox.classList.add("background-yellow");
-      tempKey.classList.add("background-yellow");
+      if (!tempKey.classList.contains("background-green")) {
+        tempKey.classList.add("background-yellow");
+      }
     } else {
       tempBox.classList.add("background-gray");
       tempKey.classList.add("background-gray");

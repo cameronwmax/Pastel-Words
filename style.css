@@ -52,7 +52,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
   visibility: hidden;
-  opacity: 1;
+  opacity: 0;
   transition: all 1s;
 }
 
@@ -104,10 +104,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.letter-box-animation {
-  animation: box-scale 0.1s linear 1;
 }
 
 @keyframes box-scale {
@@ -206,4 +202,56 @@ body {
 .background-gray {
   background-color: var(--color-secondary);
   border: none;
+}
+
+@media (max-width: 90em) {
+  .board-box {
+    padding-top: 2rem;
+  }
+
+  .alert-box {
+    top: 3%;
+  }
+
+  .keyboard-box {
+    padding-top: 2rem;
+  }
+}
+
+@media (max-width: 27em) {
+  .keyboard-box {
+    width: 100vw;
+    margin: 0;
+    padding-top: 5rem;
+  }
+
+  .key {
+    width: 3.2rem;
+    height: 5.8rem;
+  }
+
+  .key-enter,
+  .key-back {
+    width: 5.6rem;
+  }
+}
+
+@media (max-width: 24em) {
+  .board-box {
+    margin: 0;
+    width: 100vw;
+    padding-top: 0;
+  }
+
+  .keyboard-box {
+    padding-top: 1rem;
+  }
+  .key {
+    width: 3.1rem;
+    height: 6.4rem;
+  }
+  .key-enter,
+  .key-back {
+    width: 5.1rem;
+  }
 }
