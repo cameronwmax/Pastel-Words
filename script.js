@@ -85,9 +85,21 @@ function handleCorrectWord() {
     setTimeout(() => {
       rows[curRow].querySelector(`.box-${i}`).classList.add("letter-box-up");
 
-      if (i === 4) displayAlert("Great job!");
+      if (i === 4) {
+        if (curRow === 0) displayAlert("Genius!");
+        if (curRow === 1) displayAlert("Magnificent!");
+        if (curRow === 2) displayAlert("Impressive!");
+        if (curRow === 3) displayAlert("Spendid!");
+        if (curRow === 4) displayAlert("Great!");
+        if (curRow === 5) displayAlert("Phew!");
+      }
     }, 500 * i);
   }
+}
+
+function handleLoss(msg) {
+  alertMsg.innerHTML = `${msg}`;
+  alertBox.classList.add("show-alert");
 }
 
 function enterWord() {
@@ -118,10 +130,17 @@ function enterWord() {
       setTimeout(() => {
         checkingRow = false;
       }, 2500);
-    } else {
+    }
+    if (curWord === word) {
       setTimeout(() => {
         gameActive = false;
         handleCorrectWord();
+      }, 2500);
+    }
+    if (curRow === 6) {
+      setTimeout(() => {
+        gameActive = false;
+        handleLoss(word.toUpperCase());
       }, 2500);
     }
   }

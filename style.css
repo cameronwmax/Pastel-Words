@@ -27,10 +27,9 @@ body {
 
 .board-box {
   width: 35.5rem;
-  height: 42rem;
 
   margin: 0 auto;
-  margin-top: 8rem;
+  padding-top: 8rem;
 
   display: grid;
   grid-template-rows: repeat(6, 1fr);
@@ -49,11 +48,11 @@ body {
   border-radius: 5px;
 
   position: absolute;
-  top: -20px;
+  top: 10%;
   left: 50%;
   transform: translateX(-50%);
   visibility: hidden;
-  opacity: 0;
+  opacity: 1;
   transition: all 1s;
 }
 
@@ -140,7 +139,7 @@ body {
 .keyboard-box {
   width: 50rem;
   margin: 0 auto;
-  margin-top: 6rem;
+  padding-top: 6rem;
   display: grid;
   row-gap: 0.6rem;
 }
