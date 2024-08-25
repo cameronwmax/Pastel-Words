@@ -3,8 +3,7 @@
 import { WORDS } from "./words.js";
 
 // VARIABLES
-let randInt = Math.floor(Math.random() * WORDS.length);
-let word = WORDS[randInt];
+let word = getRandWord();
 
 let curRow = 0;
 let curTile = 0;
@@ -20,8 +19,21 @@ const enterKey = document.querySelector(".key-enter");
 const backKey = document.querySelector(".key-back");
 const alertBox = document.querySelector(".alert-box");
 const alertMsg = document.querySelector(".alert-msg");
+const playBtn = document.querySelector(".play-btn");
+const startBox = document.querySelector(".start-box");
 
 // FUNCTIONS
+function getRandWord() {
+  let randInt = Math.floor(Math.random() * WORDS.length);
+  let word = WORDS[randInt];
+  return word;
+}
+
+function playGame(e) {
+  e.preventDefault();
+  startBox.classList.add("hide");
+}
+
 function checkLetters(i, row) {
   setTimeout(function () {
     let tempBox = rows[row].querySelector(`.box-${i}`);
@@ -184,3 +196,5 @@ document.addEventListener("keydown", handleKeyDown.bind(this));
 enterKey.addEventListener("click", enterWord);
 
 backKey.addEventListener("click", backspace);
+
+playBtn.addEventListener("click", playGame.bind(this));
