@@ -10,130 +10,147 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./styles.css" />
 
-    <!-- <script defer type="module" src="./words.js"></script> -->
-    <script defer type="module" src="./script.js"></script>
+    <script defer type="module" src="./js/controller.js"></script>
 
-    <title>Wordle</title>
+    <title>Pastel Words</title>
   </head>
   <body>
     <div class="start-box">
       <div class="start-content">
-        <h1 class="title-text">Wordle</h1>
+        <h1 class="title-text">Pastel Words</h1>
         <span class="info-text"
-          >Get 6 chances to guess<br />
-          a 5-letter word.</span
+          >You have up to 6 tries to figure out <br />
+          the mystery 5-letter word!</span
         >
         <a href="#" class="play-btn">Play</a>
       </div>
     </div>
 
-    <div class="board-box hide">
-      <div class="row">
-        <div class="letter-box box-0"></div>
-        <div class="letter-box box-1"></div>
-        <div class="letter-box box-2"></div>
-        <div class="letter-box box-3"></div>
-        <div class="letter-box box-4"></div>
+    <main class="game-container hide">
+      <div class="board-box">
+        <div class="row">
+          <div class="letter-box box-0"></div>
+          <div class="letter-box box-1"></div>
+          <div class="letter-box box-2"></div>
+          <div class="letter-box box-3"></div>
+          <div class="letter-box box-4"></div>
+        </div>
+
+        <div class="row">
+          <div class="letter-box box-0"></div>
+          <div class="letter-box box-1"></div>
+          <div class="letter-box box-2"></div>
+          <div class="letter-box box-3"></div>
+          <div class="letter-box box-4"></div>
+        </div>
+
+        <div class="row">
+          <div class="letter-box box-0"></div>
+          <div class="letter-box box-1"></div>
+          <div class="letter-box box-2"></div>
+          <div class="letter-box box-3"></div>
+          <div class="letter-box box-4"></div>
+        </div>
+
+        <div class="row">
+          <div class="letter-box box-0"></div>
+          <div class="letter-box box-1"></div>
+          <div class="letter-box box-2"></div>
+          <div class="letter-box box-3"></div>
+          <div class="letter-box box-4"></div>
+        </div>
+
+        <div class="row">
+          <div class="letter-box box-0"></div>
+          <div class="letter-box box-1"></div>
+          <div class="letter-box box-2"></div>
+          <div class="letter-box box-3"></div>
+          <div class="letter-box box-4"></div>
+        </div>
+
+        <div class="row">
+          <div class="letter-box box-0"></div>
+          <div class="letter-box box-1"></div>
+          <div class="letter-box box-2"></div>
+          <div class="letter-box box-3"></div>
+          <div class="letter-box box-4"></div>
+        </div>
+
+        <div class="alert-box">
+          <span class="alert-msg">&nbsp;</span>
+        </div>
       </div>
 
-      <div class="row">
-        <div class="letter-box box-0"></div>
-        <div class="letter-box box-1"></div>
-        <div class="letter-box box-2"></div>
-        <div class="letter-box box-3"></div>
-        <div class="letter-box box-4"></div>
-      </div>
+      <div class="keyboard-box">
+        <div class="row-new">
+          <button type="button" data-key="q" class="key">Q</button>
+          <button type="button" data-key="w" class="key">W</button>
+          <button type="button" data-key="e" class="key">E</button>
+          <button type="button" data-key="r" class="key">R</button>
+          <button type="button" data-key="t" class="key">T</button>
+          <button type="button" data-key="y" class="key">Y</button>
+          <button type="button" data-key="u" class="key">U</button>
+          <button type="button" data-key="i" class="key">I</button>
+          <button type="button" data-key="o" class="key">O</button>
+          <button type="button" data-key="p" class="key">P</button>
+        </div>
 
-      <div class="row">
-        <div class="letter-box box-0"></div>
-        <div class="letter-box box-1"></div>
-        <div class="letter-box box-2"></div>
-        <div class="letter-box box-3"></div>
-        <div class="letter-box box-4"></div>
-      </div>
+        <div class="row-new">
+          <button type="button" data-key="a" class="key">A</button>
+          <button type="button" data-key="s" class="key">S</button>
+          <button type="button" data-key="d" class="key">D</button>
+          <button type="button" data-key="f" class="key">F</button>
+          <button type="button" data-key="g" class="key">G</button>
+          <button type="button" data-key="h" class="key">H</button>
+          <button type="button" data-key="j" class="key">J</button>
+          <button type="button" data-key="k" class="key">K</button>
+          <button type="button" data-key="l" class="key">L</button>
+        </div>
 
-      <div class="row">
-        <div class="letter-box box-0"></div>
-        <div class="letter-box box-1"></div>
-        <div class="letter-box box-2"></div>
-        <div class="letter-box box-3"></div>
-        <div class="letter-box box-4"></div>
+        <div class="row-new">
+          <button type="button" data-key="enter" class="key key-enter">ENTER</button>
+          <button type="button" data-key="z" class="key">Z</button>
+          <button type="button" data-key="x" class="key">X</button>
+          <button type="button" data-key="c" class="key">C</button>
+          <button type="button" data-key="v" class="key">V</button>
+          <button type="button" data-key="b" class="key">B</button>
+          <button type="button" data-key="n" class="key">N</button>
+          <button type="button" data-key="m" class="key">M</button>
+          <button type="button" data-key="back" class="key key-back">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="back-icon"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 9.75 14.25 12m0 0 2.25 2.25M14.25 12l2.25-2.25M14.25 12 12 14.25m-2.58 4.92-6.374-6.375a1.125 1.125 0 0 1 0-1.59L9.42 4.83c.21-.211.497-.33.795-.33H19.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25h-9.284c-.298 0-.585-.119-.795-.33Z"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
+    </main>
 
-      <div class="row">
-        <div class="letter-box box-0"></div>
-        <div class="letter-box box-1"></div>
-        <div class="letter-box box-2"></div>
-        <div class="letter-box box-3"></div>
-        <div class="letter-box box-4"></div>
-      </div>
+    <div class="restart-container hide">
+      <div class="restart-content-container">
+        <div class="restart-heading-container">
+          <h2 class="restart-heading">Restart with a new word!</h2>
+        </div>
 
-      <div class="row">
-        <div class="letter-box box-0"></div>
-        <div class="letter-box box-1"></div>
-        <div class="letter-box box-2"></div>
-        <div class="letter-box box-3"></div>
-        <div class="letter-box box-4"></div>
-      </div>
+        <div class="restart-content">
+          <p>You won in 4 guesses!</p>
+        </div>
 
-      <div class="alert-box">
-        <span class="alert-msg">&nbsp;</span>
-      </div>
-    </div>
-
-    <div class="keyboard-box hide">
-      <div class="row-new">
-        <button type="button" data-key="q" class="key">Q</button>
-        <button type="button" data-key="w" class="key">W</button>
-        <button type="button" data-key="e" class="key">E</button>
-        <button type="button" data-key="r" class="key">R</button>
-        <button type="button" data-key="t" class="key">T</button>
-        <button type="button" data-key="y" class="key">Y</button>
-        <button type="button" data-key="u" class="key">U</button>
-        <button type="button" data-key="i" class="key">I</button>
-        <button type="button" data-key="o" class="key">O</button>
-        <button type="button" data-key="p" class="key">P</button>
-      </div>
-
-      <div class="row-new">
-        <button type="button" data-key="a" class="key">A</button>
-        <button type="button" data-key="s" class="key">S</button>
-        <button type="button" data-key="d" class="key">D</button>
-        <button type="button" data-key="f" class="key">F</button>
-        <button type="button" data-key="g" class="key">G</button>
-        <button type="button" data-key="h" class="key">H</button>
-        <button type="button" data-key="j" class="key">J</button>
-        <button type="button" data-key="k" class="key">K</button>
-        <button type="button" data-key="l" class="key">L</button>
-      </div>
-
-      <div class="row-new">
-        <button type="button" data-key="enter" class="key key-enter">ENTER</button>
-        <button type="button" data-key="z" class="key">Z</button>
-        <button type="button" data-key="x" class="key">X</button>
-        <button type="button" data-key="c" class="key">C</button>
-        <button type="button" data-key="v" class="key">V</button>
-        <button type="button" data-key="b" class="key">B</button>
-        <button type="button" data-key="n" class="key">N</button>
-        <button type="button" data-key="m" class="key">M</button>
-        <button type="button" data-key="back" class="key key-back">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="back-icon"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 9.75 14.25 12m0 0 2.25 2.25M14.25 12l2.25-2.25M14.25 12 12 14.25m-2.58 4.92-6.374-6.375a1.125 1.125 0 0 1 0-1.59L9.42 4.83c.21-.211.497-.33.795-.33H19.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25h-9.284c-.298 0-.585-.119-.795-.33Z"
-            />
-          </svg>
-        </button>
+        <div class="restart-btn-container">
+          <a href="#" class="restart-btn">Play again!</a>
+        </div>
       </div>
     </div>
   </body>
