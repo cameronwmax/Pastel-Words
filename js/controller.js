@@ -4,16 +4,8 @@ import alertView from "./views/alertView.js";
 import boardView from "./views/boardView.js";
 import playView from "./views/playView.js";
 
-////////////////////// CHANGE APPEARANCE ////////////////
 function playGame() {
-  const word = JSON.parse(localStorage.getItem("word"));
-  if (word) model.state.randWord = word;
-
-  if (!model.state.randWord) {
-    const word = model.getRandomWord();
-    localStorage.setItem("word", JSON.stringify(word));
-    model.state.randWord = word;
-  }
+  if (!getWord()) setWord();
   console.log(model.state.randWord);
 
   model.state.gameActive = true;
@@ -66,7 +58,7 @@ function enterWord() {
 
       setTimeout(() => (model.state.checkingRow = false), 2500);
 
-      localStorage.setItem("guesses", JSON.stringify(model.state.guesses));
+      setLocalStorage("guesses", model.state.guesses);
     }
 
     if (model.state.curWord === model.state.randWord) {
@@ -82,14 +74,14 @@ function enterWord() {
 }
 
 function getGuesses() {
-  const data = JSON.parse(localStorage.getItem("guesses"));
+  const data = getLocalStorage("guesses");
   if (!data) return;
   return data;
 }
 
 function resetGame() {
-  localStorage.removeItem("guesses");
-  localStorage.removeItem("word");
+  removeLocalStorage("guesses");
+  removeLocalStorage("word");
   boardView.resetBoard(model.state);
   model.resetState();
 
@@ -161,12 +153,38 @@ function timeoutHelper(func) {
   setTimeout(func, ROW_CHECK_TIME);
 }
 
+function getWord() {
+  const word = getLocalStorage("word");
+  if (!word) return false;
+  model.setRandomWord(word);
+  return true;
+}
+
+function setWord() {
+  const word = model.getRandomWord();
+  model.setRandomWord(word);
+  setLocalStorage("word", word);
+}
+
+function setLocalStorage(name, data) {
+  localStorage.setItem(name, JSON.stringify(data));
+}
+
+function getLocalStorage(name) {
+  return JSON.parse(localStorage.getItem(name));
+}
+
+function removeLocalStorage(name) {
+  localStorage.removeItem(name);
+}
+
 function init() {
   playView.addHandlerPlayBtn(playGame);
   playView.addHandlerRestartBtn(resetGame);
   boardView.addHandlerKeyboardBox(handleKeyClicks);
   boardView.addHandlerKeydown(handleKeyDown);
 
-  localStorage.removeItem("guesses");
+  // removeLocalStorage("guesses");
+  // removeLocalStorage("word");
 }
 init();

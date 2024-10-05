@@ -21,7 +21,14 @@ export const state = {
 
 export function getRandomWord() {
   const randInt = Math.floor(Math.random() * WORDS.length);
-  return WORDS[randInt];
+  const word = WORDS[randInt];
+  // state.randWord = word;
+  setRandomWord(word);
+  return word;
+}
+
+export function setRandomWord(word) {
+  state.randWord = word;
 }
 
 export function guessesLen() {
