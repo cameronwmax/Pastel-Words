@@ -22,7 +22,6 @@ export const state = {
 export function getRandomWord() {
   const randInt = Math.floor(Math.random() * WORDS.length);
   const word = WORDS[randInt];
-  // state.randWord = word;
   setRandomWord(word);
   return word;
 }
@@ -57,4 +56,8 @@ export function resetState() {
   state.outcome = false;
   state.temp.row = 0;
   state.temp.word = "";
+}
+
+export function checkWord() {
+  return state.curWord === state.randWord;
 }

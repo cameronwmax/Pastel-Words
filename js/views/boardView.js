@@ -71,7 +71,6 @@ class boardView extends View {
 
   handleCorrectWord(state, msgs) {
     for (let i = 0; i < 5; i++) {
-      console.log(`Timer: ${500 * i}`);
       setTimeout(this._handleCorrectWord.bind(this), 500 * i, i, state, msgs);
     }
   }

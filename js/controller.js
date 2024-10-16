@@ -6,7 +6,6 @@ import playView from "./views/playView.js";
 
 function playGame() {
   if (!getWord()) setWord();
-  console.log(model.state.randWord);
 
   model.state.gameActive = true;
   playView.showBoard();
@@ -19,6 +18,7 @@ function playGame() {
   if (model.guessesLen() === 6) {
     model.state.playViewActive = false;
     playView.fillBoxes(model.guessesLen(), model.state.guesses, model.state.randWord);
+    lossHelper();
     return;
   }
 
@@ -30,14 +30,12 @@ function enterWord() {
   if (model.state.curTile !== 5 && !model.state.checkingRow) {
     alertView.displayAlert(ERROR_MSGS[0]);
     boardView.handleRowShake(model.state);
-    console.log("not enough letters");
     return;
   }
 
   if (!model.validateCurWord() && !model.state.checkingRow) {
     alertView.displayAlert(ERROR_MSGS[1]);
     boardView.handleRowShake(model.state);
-    console.log("not in word list");
     return;
   }
 
@@ -61,13 +59,11 @@ function enterWord() {
       setLocalStorage("guesses", model.state.guesses);
     }
 
-    if (model.state.curWord === model.state.randWord) {
+    if (model.checkWord()) {
       timeoutHelper(winHelper);
     }
 
     if (model.checkRowsFull()) {
-      console.log(model.state.curRow);
-
       timeoutHelper(lossHelper);
     }
   }
@@ -88,6 +84,7 @@ function resetGame() {
   playView.showBoard();
   playView.showRestart();
   alertView.hideAlert();
+  location.reload();
 }
 
 function winHelper() {
@@ -101,7 +98,7 @@ function winHelper() {
 }
 
 function showRestartHelper() {
-  playView.showRestart();
+  playView.showRestart(model.checkWord());
 }
 
 function lossHelper() {
@@ -184,7 +181,6 @@ function init() {
   boardView.addHandlerKeyboardBox(handleKeyClicks);
   boardView.addHandlerKeydown(handleKeyDown);
 
-  // removeLocalStorage("guesses");
-  // removeLocalStorage("word");
+  // setLocalStorage("guesses", ["shore", "shore", "shore", "shore", "shore"]);
 }
 init();

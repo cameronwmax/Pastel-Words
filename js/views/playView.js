@@ -7,7 +7,11 @@ class playView extends View {
     this._gameBox.classList.toggle("hide");
   }
 
-  showRestart() {
+  showRestart(outcome) {
+    if (outcome) this._restartHeading.innerHTML = "Correct!";
+
+    if (!outcome) this._restartHeading.innerHTML = "Incorrect";
+
     this._restartBox.classList.toggle("hide");
     this._restartContentBox.classList.toggle("add-grow");
   }

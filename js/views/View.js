@@ -13,4 +13,5 @@ export default class View {
   _alertMsg = document.querySelector(".alert-msg");
   _playBtn = document.querySelector(".play-btn");
   _restartBtn = document.querySelector(".restart-btn");
+  _restartHeading = document.querySelector(".restart-heading");
 }
