@@ -6,6 +6,7 @@ import playView from "./views/playView.js";
 
 function playGame() {
   if (!getWord()) setWord();
+  console.log(model.state.randWord);
 
   model.state.gameActive = true;
   playView.showBoard();
@@ -49,9 +50,7 @@ function enterWord() {
     if (model.state.curWord !== model.state.randWord && !model.checkRowsFull()) {
       model.state.guesses.push(model.state.curWord);
       model.state.curWord = "";
-
       model.state.curRow++;
-
       model.state.curTile = 0;
 
       setTimeout(() => (model.state.checkingRow = false), 2500);
@@ -80,7 +79,6 @@ function resetGame() {
   removeLocalStorage("word");
   boardView.resetBoard(model.state);
   model.resetState();
-
   playView.showBoard();
   playView.showRestart();
   alertView.hideAlert();
@@ -109,39 +107,53 @@ function lossHelper() {
 }
 
 function handleKeyClicks(e) {
-  if (model.state.checkingRow || !model.state.gameActive) return;
+  if (validateAction()) return;
 
-  if (!e.target.classList.contains("key")) return;
+  const key = e.target.dataset.key;
 
-  if (e.target.dataset.key === "enter") {
-    enterWord();
-    return;
-  }
+  if (!validateKeyClass(e.target)) return;
 
-  if (e.target.dataset.key === "back") {
-    handleBackspace();
-    return;
-  }
+  if (validateEnter(key)) enterWord();
 
-  boardView.displayLetter(e.target.dataset.key, model.state);
+  if (validateBackspace(key)) handleBackspace();
+
+  if (validateKeyClass(e.target) && !validateEnter(key) && !validateBackspace(key))
+    boardView.displayLetter(key, model.state);
 }
 
 function handleKeyDown(e) {
-  if (model.state.checkingRow || !model.state.gameActive) return;
+  if (validateAction()) return;
 
-  if (e.code === `Key${e.key.toUpperCase()}`)
+  const keyCode = e.code;
+
+  if (keyCode === `Key${e.key.toUpperCase()}`)
     boardView.displayLetter(e.key.toLowerCase(), model.state);
 
-  if (e.code === "Enter") enterWord();
+  if (validateEnter(keyCode)) enterWord();
 
-  if (e.code === "Backspace") handleBackspace();
+  if (validateBackspace(keyCode)) handleBackspace();
+}
+
+function validateAction() {
+  return model.state.checkingRow || !model.state.gameActive;
+}
+
+function validateKeyClass(target) {
+  return target.classList.contains("key");
+}
+
+function validateEnter(action) {
+  return action === "Enter";
+}
+
+function validateBackspace(action) {
+  return action === "Backspace";
 }
 
 function handleBackspace() {
   if (model.state.curTile === 0) return;
 
   model.state.curTile--;
-
   model.state.curWord = model.state.curWord.substring(0, model.state.curWord.length - 1);
   boardView.backspace(model.state);
 }
