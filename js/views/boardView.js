@@ -37,18 +37,30 @@ class boardView extends View {
 
   _colorBoxes(col, curWord, tempBox, tempKey, word) {
     if (curWord[col] === word[col]) {
-      tempKey.classList.remove("background-yellow");
-      tempKey.classList.add("background-green");
-      tempBox.classList.add("background-green");
-    } else if (word.includes(curWord[col])) {
-      tempBox.classList.add("background-yellow");
-      if (!tempKey.classList.contains("background-green")) {
-        tempKey.classList.add("background-yellow");
-      }
-    } else {
-      tempBox.classList.add("background-gray");
-      tempKey.classList.add("background-gray");
+      if (tempKey.classList.contains("background-yellow"))
+        this._handleColorClass(tempKey, "background-yellow", false);
+
+      this._handleColorClass(tempKey, "background-green");
+      this._handleColorClass(tempBox, "background-green");
+      return;
     }
+
+    if (word.includes(curWord[col])) {
+      if (!tempKey.classList.contains("background-green"))
+        this._handleColorClass(tempKey, "background-yellow");
+
+      this._handleColorClass(tempBox, "background-yellow");
+      return;
+    }
+
+    this._handleColorClass(tempBox, "background-gray");
+    this._handleColorClass(tempKey, "background-gray");
+  }
+
+  _handleColorClass(el, className, add = true) {
+    if (add) el.classList.add(className);
+
+    if (!add) el.classList.remove(className);
   }
 
   _checkLetters(i, state) {
