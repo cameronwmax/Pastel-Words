@@ -187,11 +187,16 @@ function removeLocalStorage(name) {
   localStorage.removeItem(name);
 }
 
+function handleColorMode() {
+  boardView.toggleColorMode();
+}
+
 function init() {
   playView.addHandlerPlayBtn(playGame);
   playView.addHandlerRestartBtn(resetGame);
   boardView.addHandlerKeyboardBox(handleKeyClicks);
   boardView.addHandlerKeydown(handleKeyDown);
+  boardView.addHandlerColorMode(handleColorMode);
 
   // setLocalStorage("guesses", ["shore", "shore", "shore", "shore", "shore"]);
 }

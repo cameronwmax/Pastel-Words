@@ -17,22 +17,50 @@
   --color-red: #f08080;
 
   --color-black: #2c2c2c;
+
+  --gradient-btn: linear-gradient(
+    to right bottom,
+    var(--color-green),
+    var(--color-yellow),
+    var(--color-red)
+  );
+  --gradient-title: linear-gradient(
+    to right,
+    var(--color-green),
+    var(--color-yellow),
+    var(--color-red)
+  );
+
+  --gradient-color-mode: linear-gradient(
+    to right bottom,
+    var(--color-light),
+    var(--color-secondary),
+    var(--color-black)
+  );
 }
 
 html {
   box-sizing: border-box;
   font-size: 62.5%;
-  color: var(--color-black);
+  /* color: var(--color-black); */
   font-family: "Roboto", sans-serif;
 }
 
 body {
-  background-color: var(--color-main);
   position: relative;
+}
+
+.bg_color--light {
+  background-color: var(--color-main);
+}
+
+.bg_color--dark {
+  background-color: var(--color-black);
 }
 
 .start-box {
   background-color: var(--color-black);
+
   display: flex;
 
   padding: 5rem;
@@ -53,7 +81,10 @@ body {
 }
 
 .title-text {
-  color: var(--color-green);
+  /* color: var(--color-green); */
+  background-image: var(--gradient-title);
+  background-clip: text;
+  color: transparent;
 }
 
 .info-text {
@@ -77,15 +108,19 @@ body {
   text-decoration: none;
   text-transform: uppercase;
   color: var(--color-black);
-  background-color: var(--color-main);
+  background: var(--gradient-btn);
+  background-position: left;
+  background-size: 200%;
+
   padding: 1.5rem 4rem;
   border-radius: 10px;
   transition: all 0.3s;
 }
 
 .play-btn:hover,
-.play-btn:active {
-  background-color: var(--color-green);
+.play-btn:active,
+.play-btn:focus {
+  background-position: right;
   transform: translateY(-3px);
 }
 
@@ -99,13 +134,53 @@ body {
   width: 35.5rem;
 
   margin: 0 auto;
-  padding-top: 8rem;
+  padding-top: 2rem;
 
   display: grid;
   grid-template-rows: repeat(6, 1fr);
   row-gap: 0.5rem;
 
   position: relative;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.color-mode__checkbox {
+  display: none;
+}
+
+.color-mode__btn {
+  background-color: var(--color-black);
+  width: 10rem;
+  height: 5rem;
+  border-radius: 200px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.color-mode__btn::before {
+  content: "";
+  position: absolute;
+  background: var(--gradient-color-mode);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin: 2.5px;
+  transition: all 0.3s;
+}
+
+input:checked + .color-mode__btn {
+  background-color: var(--color-main);
+}
+input:checked + .color-mode__btn::before {
+  transform: translateX(50px);
 }
 
 .alert-box {
@@ -168,8 +243,8 @@ body {
   width: 7rem;
   height: 7rem;
 
-  border: 2.5px solid var(--color-secondary);
-  border: 2.5px solid var(--color-black);
+  /* border: 2.5px solid var(--color-secondary); */
+  /* border: 2.5px solid var(--color-black); */
   border-radius: 5px;
 
   display: flex;
@@ -177,8 +252,18 @@ body {
   align-items: center;
 }
 
-.letter-box--used {
+.letter-box--light {
+  color: var(--color-black);
   border: 2.5px solid var(--color-black);
+}
+
+.letter-box--dark {
+  color: var(--color-light);
+  border: 2.5px solid var(--color-main);
+}
+
+.letter-box--used {
+  /* border: 2.5px solid var(--color-black); */
   animation: box-scale 0.1s linear 1;
 }
 
@@ -345,7 +430,9 @@ body {
 .restart-content-container {
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(5px);
-  border: 2rem solid rgb(255, 255, 255, 0.5);
+  border-style: solid;
+  border-image: var(--gradient-title) 1;
+  border-width: 1rem;
   box-shadow: 0 3rem 4rem rgba(0, 0, 0, 0.5);
 
   width: 60rem;
@@ -378,35 +465,42 @@ body {
 .restart-heading {
   font-size: 3.6rem;
   text-transform: uppercase;
-  color: var(--color-light);
+  background-image: var(--gradient-title);
+  background-clip: text;
+  color: transparent;
 }
 
 .restart-content {
   font-size: 2.4rem;
   padding: 2rem;
-  color: var(--color-green);
+  color: var(--color-light);
 }
 
-.restart-content--win {
+/* .restart-content--win {
   color: var(--color-green);
 }
 .restart-content--lose {
   color: var(--color-red);
-}
+} */
 
 .restart-btn {
   font-size: 2.2rem;
   text-decoration: none;
   text-transform: uppercase;
   color: var(--color-black);
-  background-color: var(--color-yellow);
+  background: var(--gradient-btn);
+  background-size: 300%;
+  background-position: left;
+
   padding: 1rem 2rem;
   border-radius: 6px;
   display: inline-block;
   transition: all 0.3s;
 }
 
-.restart-btn:hover {
-  background-color: var(--color-green);
+.restart-btn:hover,
+.restart-btn:focus {
+  /* background-color: var(--color-green); */
+  background-position: right;
   transform: translateY(-3px);
 }

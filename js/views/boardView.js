@@ -115,6 +115,33 @@ class boardView extends View {
       handler(e);
     });
   }
+
+  addHandlerColorMode(handler) {
+    this._colorModeBtn.addEventListener("click", function () {
+      handler();
+    });
+  }
+
+  toggleColorMode() {
+    this.toggleBgColor();
+    this.loopBoxes();
+  }
+
+  toggleBgColor() {
+    this._body.classList.toggle("bg_color--light");
+    this._body.classList.toggle("bg_color--dark");
+  }
+
+  loopBoxes() {
+    this._allLetterBoxes.forEach((box) => {
+      this._toggleBoxColor(box);
+    });
+  }
+
+  _toggleBoxColor(box) {
+    box.classList.toggle("letter-box--light");
+    box.classList.toggle("letter-box--dark");
+  }
 }
 
 export default new boardView();

@@ -14,4 +14,8 @@ export default class View {
   _playBtn = document.querySelector(".play-btn");
   _restartBtn = document.querySelector(".restart-btn");
   _restartHeading = document.querySelector(".restart-heading");
+
+  _colorModeBtn = document.querySelector(".color-mode__btn");
+  _body = document.querySelector("body");
+  _allLetterBoxes = document.querySelectorAll(".letter-box");
 }
