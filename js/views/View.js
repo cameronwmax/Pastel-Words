@@ -18,4 +18,5 @@ export default class View {
   _colorModeBtn = document.querySelector(".color-mode__btn");
   _body = document.querySelector("body");
   _allLetterBoxes = document.querySelectorAll(".letter-box");
+  _colorModeCheckbox = document.querySelector(".color-mode__checkbox");
 }

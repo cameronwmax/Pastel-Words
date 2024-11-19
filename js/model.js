@@ -17,6 +17,8 @@ export const state = {
     row: 0,
     word: "",
   },
+
+  darkMode: false,
 };
 
 export function getRandomWord() {

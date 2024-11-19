@@ -81,7 +81,6 @@ body {
 }
 
 .title-text {
-  /* color: var(--color-green); */
   background-image: var(--gradient-title);
   background-clip: text;
   color: transparent;
@@ -130,17 +129,25 @@ body {
 }
 
 /* ///////////////////////////////////////////// */
-.board-box {
-  width: 35.5rem;
+.game-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+}
 
+.board-box {
+  width: max-content;
   margin: 0 auto;
   padding-top: 2rem;
-
   display: grid;
   grid-template-rows: repeat(6, 1fr);
   row-gap: 0.5rem;
 
   position: relative;
+  justify-self: center;
+  align-self: center;
 }
 
 .wrapper {
@@ -181,6 +188,31 @@ input:checked + .color-mode__btn {
 }
 input:checked + .color-mode__btn::before {
   transform: translateX(50px);
+}
+
+@media screen and (max-width: 90em) {
+  .board-box {
+    padding-top: 1rem;
+  }
+
+  .wrapper {
+    margin-top: 1rem;
+  }
+
+  .color-mode__btn {
+    width: 5rem;
+    height: 2.5rem;
+  }
+
+  .color-mode__btn::before {
+    width: calc(45px / 2);
+    height: calc(45px / 2);
+    margin: calc(2.5px / 2);
+  }
+
+  input:checked + .color-mode__btn::before {
+    transform: translateX(25px);
+  }
 }
 
 .alert-box {

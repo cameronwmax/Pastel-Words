@@ -5,6 +5,8 @@ import boardView from "./views/boardView.js";
 import playView from "./views/playView.js";
 
 function playGame() {
+  checkColorPrefs();
+
   if (!getWord()) setWord();
   console.log(model.state.randWord);
 
@@ -25,6 +27,11 @@ function playGame() {
 
   model.state.curRow = model.guessesLen();
   playView.fillBoxes(model.guessesLen(), model.state.guesses, model.state.randWord);
+}
+
+function checkColorPrefs() {
+  model.state.darkMode = getLocalStorage("dark-mode");
+  if (model.state.darkMode) handleColorMode(model.state.darkMode);
 }
 
 function enterWord() {
@@ -187,8 +194,12 @@ function removeLocalStorage(name) {
   localStorage.removeItem(name);
 }
 
-function handleColorMode() {
-  boardView.toggleColorMode();
+function handleColorMode(preference = false) {
+  if (!preference) {
+    model.state.darkMode = !model.state.darkMode;
+    setLocalStorage("dark-mode", model.state.darkMode);
+  }
+  boardView.toggleColorMode(preference);
 }
 
 function init() {
@@ -197,7 +208,5 @@ function init() {
   boardView.addHandlerKeyboardBox(handleKeyClicks);
   boardView.addHandlerKeydown(handleKeyDown);
   boardView.addHandlerColorMode(handleColorMode);
-
-  // setLocalStorage("guesses", ["shore", "shore", "shore", "shore", "shore"]);
 }
 init();

@@ -122,9 +122,11 @@ class boardView extends View {
     });
   }
 
-  toggleColorMode() {
+  toggleColorMode(preference = false) {
     this.toggleBgColor();
     this.loopBoxes();
+
+    if (preference) this._colorModeCheckbox.checked = !this._colorModeCheckbox.checked;
   }
 
   toggleBgColor() {
