@@ -128,7 +128,6 @@ body {
   visibility: hidden;
 }
 
-/* ///////////////////////////////////////////// */
 .game-container {
   display: flex;
   flex-direction: column;
@@ -275,8 +274,6 @@ input:checked + .color-mode__btn::before {
   width: 7rem;
   height: 7rem;
 
-  /* border: 2.5px solid var(--color-secondary); */
-  /* border: 2.5px solid var(--color-black); */
   border-radius: 5px;
 
   display: flex;
@@ -295,7 +292,6 @@ input:checked + .color-mode__btn::before {
 }
 
 .letter-box--used {
-  /* border: 2.5px solid var(--color-black); */
   animation: box-scale 0.1s linear 1;
 }
 
@@ -362,19 +358,14 @@ input:checked + .color-mode__btn::before {
 
 .key-back {
   width: 6.4rem;
+  z-index: 10;
 }
 
 .back-icon {
   width: 2.6rem;
   height: 2.6rem;
+  pointer-events: none;
 }
-
-/* .letter-box::before {
-  content: "";
-}
-.box-0::before {
-  content: "";
-} */
 
 .background-green,
 .background-yellow,
@@ -508,13 +499,6 @@ input:checked + .color-mode__btn::before {
   color: var(--color-light);
 }
 
-/* .restart-content--win {
-  color: var(--color-green);
-}
-.restart-content--lose {
-  color: var(--color-red);
-} */
-
 .restart-btn {
   font-size: 2.2rem;
   text-decoration: none;
@@ -532,7 +516,6 @@ input:checked + .color-mode__btn::before {
 
 .restart-btn:hover,
 .restart-btn:focus {
-  /* background-color: var(--color-green); */
   background-position: right;
   transform: translateY(-3px);
 }
