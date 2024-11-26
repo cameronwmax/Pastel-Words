@@ -1,4 +1,4 @@
-const test = [
+export const WORDS = [
   "about",
   "their",
   "there",
