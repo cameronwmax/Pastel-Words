@@ -1,5 +1,5 @@
 export const TILES_FULL = 5;
-/// CHANGED FROM 5
+
 export const ROWS_FULL = 5;
 export const ROW_CHECK_TIME = 2500;
 export const ERROR_MSGS = ["Not enough letters", "Not in word list"];

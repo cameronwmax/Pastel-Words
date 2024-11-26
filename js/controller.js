@@ -8,7 +8,6 @@ function playGame() {
   checkColorPrefs();
 
   if (!getWord()) setWord();
-  console.log(model.state.randWord);
 
   model.state.gameActive = true;
   playView.showBoard();
