@@ -519,3 +519,36 @@ input:checked + .color-mode__btn::before {
   background-position: right;
   transform: translateY(-3px);
 }
+
+.rules-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.rules-box {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.color-square {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 5px;
+}
+
+.color-square__green {
+  background-color: var(--color-green);
+}
+.color-square__yellow {
+  background-color: var(--color-yellow);
+}
+.color-square__red {
+  background-color: var(--color-red);
+}
+
+.rules-text {
+  color: var(--color-secondary);
+  font-size: 1.6rem;
+}
