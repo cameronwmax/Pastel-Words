@@ -130,18 +130,21 @@ function handleKeyClicks(e) {
 function handleKeyDown(e) {
   if (validateAction()) return;
 
-  const keyCode = e.code;
+  const key = e.key;
 
-  if (keyCode === `Key${e.key.toUpperCase()}`)
-    boardView.displayLetter(e.key.toLowerCase(), model.state);
+  if (validateKey(key)) boardView.displayLetter(key.toLowerCase(), model.state);
 
-  if (validateEnter(keyCode)) enterWord();
+  if (validateEnter(key)) enterWord();
 
-  if (validateBackspace(keyCode)) handleBackspace();
+  if (validateBackspace(key)) handleBackspace();
 }
 
 function validateAction() {
   return model.state.checkingRow || !model.state.gameActive;
+}
+
+function validateKey(key) {
+  return key.length === 1 && /^[a-zA-Z]$/.test(key);
 }
 
 function validateKeyClass(target) {
