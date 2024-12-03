@@ -42,13 +42,12 @@
 html,
 body,
 * {
-  touch-action: manipulation;
+  touch-action: pan-y, pan-x;
 }
 
 html {
   box-sizing: border-box;
   font-size: 62.5%;
-  /* color: var(--color-black); */
   font-family: "Roboto", sans-serif;
 }
 
