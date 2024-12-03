@@ -40,7 +40,8 @@
 }
 
 html,
-body {
+body,
+* {
   touch-action: manipulation;
 }
 
