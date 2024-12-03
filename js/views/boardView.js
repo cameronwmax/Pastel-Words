@@ -46,15 +46,28 @@ class boardView extends View {
     }
 
     if (word.includes(curWord[col])) {
+      this._checkDuplicates(word, curWord, col, tempBox);
+
       if (!tempKey.classList.contains("background-green"))
         this._handleColorClass(tempKey, "background-yellow");
 
-      this._handleColorClass(tempBox, "background-yellow");
+      if (!tempBox.classList.contains("background-gray"))
+        this._handleColorClass(tempBox, "background-yellow");
+
       return;
     }
 
     this._handleColorClass(tempBox, "background-gray");
     this._handleColorClass(tempKey, "background-gray");
+  }
+
+  _checkDuplicates(word, curWord, col, tempBox) {
+    if (
+      word.slice(0, col).includes(curWord[col]) &&
+      !word.slice(col + 1, 5).includes(curWord[col])
+    ) {
+      this._handleColorClass(tempBox, "background-gray");
+    }
   }
 
   _handleColorClass(el, className, add = true) {
